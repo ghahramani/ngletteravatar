@@ -1,1 +1,5 @@
 /nbproject/private/
+*.iml
+*.ipr
+*.iws
+node_modules/
