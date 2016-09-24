@@ -57,6 +57,7 @@ name | default | description
 `data` |  | Input data i.e. email, names...etc -OR- If image already exists for item, set image URL or image data
 `height` | 50px | set the height for the avatar
 `width` | 50px | set the width for the avatar
+`class` | No default value | set the css class for the avatar
 `fontWeight` | 400 | set the font weight for the  avatar
 `fontSize` | 30px | set the font size for the letter
 `shape` | square  | set the shape for the avatar. set 'round' for rounded avatars
