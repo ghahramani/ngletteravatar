@@ -143,13 +143,13 @@ nla.directive('ngLetterAvatar', ['defaultSettings', function (defaultSettings) {
                     }
                 }
 
-                var img;
+                var img = angular.element(component);
 
                 if (params.dynamic === 'true') {
                     element.empty();
-                    img = element.append(component);
+                    element.append(img);
                 } else {
-                    img = element.replaceWith(component);
+                    element.replaceWith(img);
                 }
 
                 img.addClass(params.class);
