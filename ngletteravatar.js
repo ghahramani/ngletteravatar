@@ -11,7 +11,7 @@ var nla = angular.module('ngLetterAvatar', []);
 nla.constant('defaultSettings', {
     alphabetcolors: ["#5A8770", "#B2B7BB", "#6FA9AB", "#F5AF29", "#0088B9", "#F18636", "#D93A37", "#A6B12E", "#5C9BBC", "#F5888D", "#9A89B5", "#407887", "#9A89B5", "#5A8770", "#D33F33", "#A2B01F", "#F0B126", "#0087BF", "#F18636", "#0087BF", "#B2B7BB", "#72ACAE", "#9C8AB4", "#5A8770", "#EEB424", "#407887"],
     textColor: '#ffffff',
-    class: '',
+    classes: '',
     defaultBorder: 'border:5px solid white',
     triangleup: 'width: 0;height: 0;border-left: 50px solid transparent;border-right: 50px solid transparent;border-bottom: 100px solid;',
     fontsize: 30, // unit in pixels
@@ -50,7 +50,7 @@ nla.directive('ngLetterAvatar', ['defaultSettings', function (defaultSettings) {
                 charCount: attrs.charcount || defaultSettings.charCount,
                 data: attrs.data,
                 textColor: defaultSettings.textColor,
-                class: attrs.class || defaultSettings.class,
+                classes: attrs.classes || defaultSettings.classes,
                 height: attrs.height || defaultSettings.height,
                 width: attrs.width || defaultSettings.width,
                 fontsize: attrs.fontsize || defaultSettings.fontsize,
@@ -147,12 +147,16 @@ nla.directive('ngLetterAvatar', ['defaultSettings', function (defaultSettings) {
 
                 if (params.dynamic === 'true') {
                     element.empty();
+                    img.css({
+                        width: '100%',
+                        height: '100%'
+                    });
                     element.append(img);
+                    element.addClass(params.classes);
                 } else {
                     element.replaceWith(img);
+                    img.addClass(params.classes);
                 }
-
-                img.addClass(params.class);
             }
         }
     };
@@ -180,8 +184,7 @@ function getFirstAndLastName(data) {
         var firstName = names[0];
         var lastName = names[1];
         if (firstName && lastName) {
-            var text = firstName.substr(0, 1) + lastName.substr(0, 1);
-            return text;
+            return firstName.substr(0, 1) + lastName.substr(0, 1);
         } else {
             return data.substr(0, 2);
         }
@@ -197,7 +200,7 @@ function getFirstAndLastName(data) {
  */
 function getImgTag(width, height, color) {
 
-    var svgTag = angular.element('<svg></svg>')
+    return angular.element('<svg></svg>')
         .attr({
             'xmlns': 'http://www.w3.org/2000/svg',
             'pointer-events': 'none',
@@ -209,8 +212,6 @@ function getImgTag(width, height, color) {
             'width': width + 'px',
             'height': height + 'px'
         });
-
-    return svgTag;
 }
 
 /**
@@ -223,7 +224,7 @@ function getImgTag(width, height, color) {
  * @returns {unresolved}
  */
 function getCharacterObject(character, textColor, fontFamily, fontWeight, fontsize) {
-    var textTag = angular.element('<text text-anchor="middle"></text>')
+    return angular.element('<text text-anchor="middle"></text>')
         .attr({
             'y': '50%',
             'x': '50%',
@@ -238,7 +239,5 @@ function getCharacterObject(character, textColor, fontFamily, fontWeight, fontsi
             'font-weight': fontWeight,
             'font-size': fontsize + 'px',
         });
-
-    return textTag;
 }
 
